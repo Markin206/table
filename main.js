@@ -1,22 +1,30 @@
-const array = [
+let array = [
     {
         firstname: 'Géza',
         firstname2: 'Ferenc',
-        lastname: 'Kocsis'
+        lastname: 'Kocsis',
+        married: true,
+        pet: 'kutya'
     },
     {
         firstname: 'Mária',
         firstname2: 'Júlia',
-        lastname: 'Horváth'
+        lastname: 'Horváth',
+        married: false,
+        pet: 'macska'
     },
     {
         firstname: 'Ferenc',
-        lastname: 'Balogh'
+        lastname: 'Balogh',
+        married: false,
+        pet: 'teknős'
     },
     {
         firstname: 'Gábor',
         firstname2: 'Attila',
-        lastname: 'Horváth'
+        lastname: 'Horváth',
+        married: true,
+        pet: 'macska'
     },
 ]
 
@@ -35,23 +43,60 @@ tableheadrow.appendChild(lastname)
 const firstname = document.createElement('th')
 tableheadrow.appendChild(firstname)
 
+const married = document.createElement('th')
+tableheadrow.appendChild(married)
+
+const pet = document.createElement('th')
+tableheadrow.appendChild(pet)
+
+
 lastname.innerHTML="Veznev"
 firstname.innerHTML="Kernev"
+married.innerHTML="Házas"
+pet.innerHTML = "Háziállat"
 firstname.colSpan = 2
 
 const tablebody = document.createElement('tbody')
 table.appendChild(tablebody)
 for(const person of array){
     const tr = document.createElement('tr')
+
+
     const lastname = document.createElement('td')
     tablebody.appendChild(tr)
     tr.appendChild(lastname)
     lastname.innerHTML = person.lastname
+
+
     const firstname = document.createElement('td')
     tablebody.appendChild(tr)
     tr.appendChild(firstname)
     firstname.innerHTML = person.firstname
     tablebody.appendChild(tr)
+
+
+    if(person.firstname2===undefined){
+        firstname.colSpan = 2
+    }
+    else{
+        const firstname2 = document.createElement('td')
+        firstname2.innerHTML = person.firstname2
+        tr.appendChild(firstname2)
+    }
+
+
+    const married = document.createElement('td');
+    tablebody.appendChild(tr);
+    tr.appendChild(married);
+    married.innerHTML = person.married === true? 'Igaz' : 'Nem';
+
+
+    const pet = document.createElement('td');
+    tablebody.appendChild(tr);
+    tr.appendChild(pet);
+    pet.innerHTML = person.pet;
+    tablebody.appendChild(tr);
+
     
     tr.addEventListener('click', function(e)
         {
@@ -62,18 +107,7 @@ for(const person of array){
                     
                 }
             console.log('click');
-            e.currentTarget.classList.add('selected');
-            
-            
+            e.currentTarget.classList.add('selected'); 
         }
-    )
-
-    if(person.firstname2===undefined){
-        firstname.colSpan = 2
-    }
-    else{
-        const firstname2 = document.createElement('td')
-        firstname2.innerHTML = person.firstname2
-        tr.appendChild(firstname2)
-    }
+    )  
 }

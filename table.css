@@ -22,3 +22,7 @@ tbody tr:nth-child(2n+1){
 tbody tr:hover{
     background-color: rgb(43, 40, 212);
 }
+
+.selected{
+    transform: scale(1.2);
+}

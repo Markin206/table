@@ -1,20 +1,20 @@
 const array = [
     {
-        firstname1: 'Géza',
+        firstname: 'Géza',
         firstname2: 'Ferenc',
         lastname: 'Kocsis'
     },
     {
-        firstname1: 'Mária',
+        firstname: 'Mária',
         firstname2: 'Júlia',
         lastname: 'Horváth'
     },
     {
-        firstname1: 'Ferenc',
+        firstname: 'Ferenc',
         lastname: 'Balogh'
     },
     {
-        firstname1: 'Gábor',
+        firstname: 'Gábor',
         firstname2: 'Attila',
         lastname: 'Horváth'
     },
@@ -29,15 +29,15 @@ table.appendChild(tablehead)
 const tableheadrow = document.createElement('tr')
 tablehead.appendChild(tableheadrow)
 
-const veznev = document.createElement('th')
-tableheadrow.appendChild(veznev)
+const lastname = document.createElement('th')
+tableheadrow.appendChild(lastname)
 
-const Kernev = document.createElement('th')
-tableheadrow.appendChild(kernev)
+const firstname = document.createElement('th')
+tableheadrow.appendChild(firstname)
 
-veznev.innerHTML="Veznev"
-kernev.innerHTML="Kernev"
-kernev.colSpan = 2
+lastname.innerHTML="Veznev"
+firstname.innerHTML="Kernev"
+firstname.colSpan = 2
 
 const tablebody = document.createElement('tbody')
 table.appendChild(tablebody)
@@ -50,9 +50,23 @@ for(const person of array){
     const firstname = document.createElement('td')
     tablebody.appendChild(tr)
     tr.appendChild(firstname)
-    firstname.innerHTML = person.firstname1
+    firstname.innerHTML = person.firstname
     tablebody.appendChild(tr)
     
+    tr.addEventListener('click', function(e)
+        {
+            const selected = tablebody.querySelector('.selected');
+            if(selected !=undefined)
+                {
+                    selected.classList.remove('selected');
+                    
+                }
+            console.log('click');
+            e.currentTarget.classList.add('selected');
+            
+            
+        }
+    )
 
     if(person.firstname2===undefined){
         firstname.colSpan = 2

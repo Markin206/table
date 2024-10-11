@@ -58,59 +58,7 @@ firstname.colSpan = 2
 
 const tablebody = document.createElement('tbody')
 table.appendChild(tablebody)
-for(const person of array){
-    const tr = document.createElement('tr')
 
-
-    const lastname = document.createElement('td')
-    tablebody.appendChild(tr)
-    tr.appendChild(lastname)
-    lastname.innerHTML = person.lastname
-
-
-    const firstname = document.createElement('td')
-    tablebody.appendChild(tr)
-    tr.appendChild(firstname)
-    firstname.innerHTML = person.firstname
-    tablebody.appendChild(tr)
-
-
-    if(person.firstname2===undefined){
-        firstname.colSpan = 2
-    }
-    else{
-        const firstname2 = document.createElement('td')
-        firstname2.innerHTML = person.firstname2
-        tr.appendChild(firstname2)
-    }
-
-
-    const married = document.createElement('td');
-    tablebody.appendChild(tr);
-    tr.appendChild(married);
-    married.innerHTML = person.married === true? 'Igaz' : 'Nem';
-
-
-    const pet = document.createElement('td');
-    tablebody.appendChild(tr);
-    tr.appendChild(pet);
-    pet.innerHTML = person.pet;
-    tablebody.appendChild(tr);
-
-    
-    tr.addEventListener('click', function(e)
-        {
-            const selected = tablebody.querySelector('.selected');
-            if(selected !=undefined)
-                {
-                    selected.classList.remove('selected');
-                    
-                }
-            console.log('click');
-            e.currentTarget.classList.add('selected'); 
-        }
-    )  
-}
 
 const form = document.getElementById('form');
 form.addEventListener('submit', function(e){
@@ -121,9 +69,83 @@ form.addEventListener('submit', function(e){
     const married = document.getElementById('married');
     const pet = document.getElementById('pet');
 
-    const lastnameValue = lastname.value;
-    const firstname1Value = firstname1.value;
-    const firstname2Value = firstname2.value;
-    const marriedChecked = married.checked;
-    const petValue = pet.value;
+    let lastnameValue = lastname.value;
+    let firstname1Value = firstname1.value;
+    let firstname2Value = firstname2.value;
+    let marriedChecked = married.checked;
+    let petValue = pet.value;
+    if(firstname2Value ==""){
+        firstname2Value = undefined;
+    }
+    let new_person = {
+        lastname: lastnameValue,
+        firstname: firstname1Value,
+        firstname2: firstname2Value,
+        pet: petValue,
+        married: marriedChecked
+    }
+    array.push(new_person); //hozzá adjuk a new_person objektumot az array tömbhöz
+    console.log(array);
+    tablebody.innerHTML = ""; // kiürítjük a tbody-t hogy ne építse fel a tablet teljesen újra.
+    
+    rendertable();
 })
+
+
+//--------------------------------------------------------------------- table-t létrehozó függvény
+rendertable();
+    function rendertable() {
+        for(const person of array){
+            const tr = document.createElement('tr')
+        
+        
+            const lastname = document.createElement('td')
+            tablebody.appendChild(tr)
+            tr.appendChild(lastname)
+            lastname.innerHTML = person.lastname
+        
+        
+            const firstname = document.createElement('td')
+            tablebody.appendChild(tr)
+            tr.appendChild(firstname)
+            firstname.innerHTML = person.firstname
+            tablebody.appendChild(tr)
+        
+        
+            if(person.firstname2===undefined){
+                firstname.colSpan = 2
+            }
+            else{
+                const firstname2 = document.createElement('td')
+                firstname2.innerHTML = person.firstname2
+                tr.appendChild(firstname2)
+            }
+        
+        
+            const married = document.createElement('td');
+            tablebody.appendChild(tr);
+            tr.appendChild(married);
+            married.innerHTML = person.married === true? 'Igaz' : 'Nem';
+        
+        
+            const pet = document.createElement('td');
+            tablebody.appendChild(tr);
+            tr.appendChild(pet);
+            pet.innerHTML = person.pet;
+            tablebody.appendChild(tr);
+        
+            
+            tr.addEventListener('click', function(e)
+                {
+                    const selected = tablebody.querySelector('.selected');
+                    if(selected !=undefined)
+                        {
+                            selected.classList.remove('selected');
+                            
+                        }
+                    console.log('click');
+                    e.currentTarget.classList.add('selected'); 
+                }
+            )  
+        }
+    }

@@ -98,7 +98,7 @@ form.addEventListener('submit', function(e){
 
 
 function Validatefield(lastname, firstname1, pet){
-    let result;
+    let result = true;
     if(lastname.value=== ""){
         const parentElement = lastname.parentElement
         const error = parentElement.querySelector('.error')
@@ -119,6 +119,7 @@ function Validatefield(lastname, firstname1, pet){
         error.innerHTML = "Kötelező állat";
         result = false;
     }
+    return result;
 }
 
 //--------------------------------------------------------------------- table-t létrehozó függvény

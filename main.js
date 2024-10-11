@@ -59,7 +59,7 @@ firstname.colSpan = 2
 const tablebody = document.createElement('tbody')
 table.appendChild(tablebody)
 
-
+//---------------------------------------------------------- FORM
 const form = document.getElementById('form');
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -74,6 +74,7 @@ form.addEventListener('submit', function(e){
     let firstname2Value = firstname2.value;
     let marriedChecked = married.checked;
     let petValue = pet.value;
+
     if(firstname2Value ==""){
         firstname2Value = undefined;
     }
@@ -84,13 +85,41 @@ form.addEventListener('submit', function(e){
         pet: petValue,
         married: marriedChecked
     }
-    array.push(new_person); //hozzá adjuk a new_person objektumot az array tömbhöz
-    console.log(array);
-    tablebody.innerHTML = ""; // kiürítjük a tbody-t hogy ne építse fel a tablet teljesen újra.
+    if(Validatefield(lastname, firstname, pet)){
+        array.push(new_person); //hozzá adjuk a new_person objektumot az array tömbhöz
+        console.log(array);
+        tablebody.innerHTML = ""; // kiürítjük a tbody-t hogy ne építse fel a tablet teljesen újra.
+        
+        rendertable();
+    }
     
-    rendertable();
 })
 
+
+
+function Validatefield(lastname, firstname1, pet){
+    let result;
+    if(lastname.value=== ""){
+        const parentElement = lastname.parentElement
+        const error = parentElement.querySelector('.error')
+        error.innerHTML = "Kötelező vezetéknév";
+        result = false;
+    }
+
+    if(firstname1.value=== ""){
+        const parentElement = firstname1.parentElement
+        const error = parentElement.querySelector('.error')
+        error.innerHTML = "Kötelező keresztnév";
+        result = false;
+    }
+
+    if(firstname1.value=== ""){
+        const parentElement = pet.parentElement
+        const error = parentElement.querySelector('.error')
+        error.innerHTML = "Kötelező állat";
+        result = false;
+    }
+}
 
 //--------------------------------------------------------------------- table-t létrehozó függvény
 rendertable();

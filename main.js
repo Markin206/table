@@ -99,6 +99,14 @@ form.addEventListener('submit', function(e){
 
 function Validatefield(lastname, firstname1, pet){
     let result = true;
+    
+    const error = form.querySelectorAll('.error');
+    for(const errors of error)
+    {
+    errors.innerHTML = "";
+    }
+
+
     if(lastname.value=== ""){
         const parentElement = lastname.parentElement
         const error = parentElement.querySelector('.error')
@@ -121,7 +129,6 @@ function Validatefield(lastname, firstname1, pet){
     }
     return result;
 }
-
 //--------------------------------------------------------------------- table-t létrehozó függvény
 rendertable();
     function rendertable() {

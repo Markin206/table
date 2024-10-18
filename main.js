@@ -85,7 +85,7 @@ form.addEventListener('submit', function(e){
         pet: petValue,
         married: marriedChecked
     }
-    if(Validatefield(lastname, firstname, pet)){
+    if(Validatefield(lastname, firstname1, pet)){
         array.push(new_person); //hozzá adjuk a new_person objektumot az array tömbhöz
         console.log(array);
         tablebody.innerHTML = ""; // kiürítjük a tbody-t hogy ne építse fel a tablet teljesen újra.
@@ -113,7 +113,7 @@ function Validatefield(lastname, firstname1, pet){
         result = false;
     }
 
-    if(firstname1.value=== ""){
+    if(pet.value=== ""){
         const parentElement = pet.parentElement
         const error = parentElement.querySelector('.error')
         error.innerHTML = "Kötelező állat";

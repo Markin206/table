@@ -95,11 +95,16 @@ form.addEventListener('submit', function(e){
     
 })
 
-
+function createtablecell(tagname, HTML,parent ){
+    const el = document.createElement(tagname);
+    el.innerHTML = HTML;
+    parent.appendChild(el);
+}
 
 function Validatefield(lastname, firstname1, pet){
     let result = true;
-    
+
+    //kiürítjük a error
     const error = form.querySelectorAll('.error');
     for(const errors of error)
     {

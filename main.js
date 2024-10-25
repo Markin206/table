@@ -91,11 +91,21 @@ form.addEventListener('submit', function(e){
         tablebody.innerHTML = ""; // kiürítjük a tbody-t hogy ne építse fel a tablet teljesen újra.
         
         rendertable();
+        form.reset();
     }
     
 })
+//---------------------------------------------------------------------- HÁZI
 
-function createtablecell(tagname, HTML,parent ){
+/**
+ * 
+ * @param {'td'|'th'} tagname 
+ * @param {string} HTML 
+ * @param {HTMLTableRowElement return{HTMLTableCellElement}} parent 
+ * 
+ */
+//----------------------------------------------------------------------
+function createtablecell(tagname, HTML, parent ){
     const el = document.createElement(tagname);
     el.innerHTML = HTML;
     parent.appendChild(el);

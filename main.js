@@ -28,14 +28,12 @@ let array = [
     },
 ]
 
-const table = document.createElement('table')
-document.body.appendChild(table)
+createHTMLElement('table','persontable',document.body)
 
-const tablehead = document.createElement('thead')
-table.appendChild(tablehead)
+createHTMLElementWithParentID('thead','persontablehead','persontable')
 
-const tableheadrow = document.createElement('tr')
-tablehead.appendChild(tableheadrow)
+createHTMLElementWithParentID('tr','persontableheadrow','persontablehead')
+
 
 const lastname = document.createElement('th')
 tableheadrow.appendChild(lastname)
@@ -96,21 +94,29 @@ form.addEventListener('submit', function(e){
     
 })
 //---------------------------------------------------------------------- HÁZI
+const header = [ //tableheadernek a tulajdonsága és szövege
+    {headerstring: "Keresztnév", colSpan: 1},
+    {headerstring: "Vezetéknév", colSpan: 2},
+    {headerstring: "Házas-e?", colSpan: 1},
+    {headerstring: "Háziállat", colSpan: 1}
+]
 
-/**
- * 
- * @param {'td'|'th'} tagname 
- * @param {string} HTML 
- * @param {HTMLTableRowElement return{HTMLTableCellElement}} parent 
- * 
- */
-//----------------------------------------------------------------------
-function createtablecell(tagname, HTML, parent ){
-    const el = document.createElement(tagname);
-    el.innerHTML = HTML;
-    parent.appendChild(el);
+for(const headcell of header){ //beágyazni a th-ba a headert
+    const th = document.createElement('th')
+    th.innerHTML = headcell.headerstring
+    th.colSpan = headcell.colSpan;
+    tableheadrow.appendChild(th)    
 }
 
+
+//---------------------------------------------------------------------
+/**
+ * 
+ * @param {string} lastname 
+ * @param {string} firstname1 
+ * @param {string} pet 
+ * @returns {boolean}
+ */
 function Validatefield(lastname, firstname1, pet){
     let result = true;
 
@@ -121,7 +127,7 @@ function Validatefield(lastname, firstname1, pet){
     errors.innerHTML = "";
     }
 
-
+    //error szövegek kiíratása ha valamelyik feltétel megtörténik
     if(lastname.value=== ""){
         const parentElement = lastname.parentElement
         const error = parentElement.querySelector('.error')

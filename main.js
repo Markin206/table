@@ -28,24 +28,13 @@ let array = [
     },
 ]
 
-createHTMLElement('table','persontable',document.body)
+createHTMLElement('table','persontable',document.body);
 
-createHTMLElementWithParentID('thead','persontablehead','persontable')
+createHTMLElementWithParentID('thead','persontablehead','persontable');
 
-createHTMLElementWithParentID('tr','persontableheadrow','persontablehead')
+createHTMLElementWithParentID('tr','persontableheadrow','persontablehead');
 
-
-const lastname = document.createElement('th')
-tableheadrow.appendChild(lastname)
-
-const firstname = document.createElement('th')
-tableheadrow.appendChild(firstname)
-
-const married = document.createElement('th')
-tableheadrow.appendChild(married)
-
-const pet = document.createElement('th')
-tableheadrow.appendChild(pet)
+renderTableHeader();
 
 
 lastname.innerHTML="Veznev"
@@ -54,8 +43,9 @@ married.innerHTML="Házas"
 pet.innerHTML = "Háziállat"
 firstname.colSpan = 2
 
-const tablebody = document.createElement('tbody')
-table.appendChild(tablebody)
+createHTMLElementWithParentID('tbody','persontablebody','persontable');
+//const tablebody = document.createElement('tbody')
+//table.appendChild(tablebody)
 
 //---------------------------------------------------------- FORM
 const form = document.getElementById('form');

@@ -1,51 +1,16 @@
 let array = [
-    {
-        firstname: 'Géza',
-        firstname2: 'Ferenc',
-        lastname: 'Kocsis',
-        married: true,
-        pet: 'kutya'
-    },
-    {
-        firstname: 'Mária',
-        firstname2: 'Júlia',
-        lastname: 'Horváth',
-        married: false,
-        pet: 'macska'
-    },
-    {
-        firstname: 'Ferenc',
-        lastname: 'Balogh',
-        married: false,
-        pet: 'teknős'
-    },
-    {
-        firstname: 'Gábor',
-        firstname2: 'Attila',
-        lastname: 'Horváth',
-        married: true,
-        pet: 'macska'
-    },
-]
+    { firstname1: 'Géza', firstname2: 'Ferenc', lastname: 'Kocsis', married: true, pet: 'kutya' },
+    { firstname1: 'Mária', firstname2: 'Júlia', lastname: 'Horváth', married: false, pet: 'macska' },
+    { firstname1: 'Ferenc', lastname: 'Balogh', married: false, pet: 'teknős' },
+    { firstname1: 'Gábor', firstname2: 'Attila', lastname: 'Horváth', married: true, pet: 'macska' }
+];
 
 createHTMLElement('table','persontable',document.body);
-
 createHTMLElementWithParentID('thead','persontablehead','persontable');
-
 createHTMLElementWithParentID('tr','persontableheadrow','persontablehead');
-
 renderTableHeader();
 
-
-lastname.innerHTML="Veznev"
-firstname.innerHTML="Kernev"
-married.innerHTML="Házas"
-pet.innerHTML = "Háziállat"
-firstname.colSpan = 2
-
 createHTMLElementWithParentID('tbody','persontablebody','persontable');
-//const tablebody = document.createElement('tbody')
-//table.appendChild(tablebody)
 
 //---------------------------------------------------------- FORM
 const form = document.getElementById('form');
@@ -83,22 +48,6 @@ form.addEventListener('submit', function(e){
     }
     
 })
-//---------------------------------------------------------------------- HÁZI
-const header = [ //tableheadernek a tulajdonsága és szövege
-    {headerstring: "Keresztnév", colSpan: 1},
-    {headerstring: "Vezetéknév", colSpan: 2},
-    {headerstring: "Házas-e?", colSpan: 1},
-    {headerstring: "Háziállat", colSpan: 1}
-]
-
-for(const headcell of header){ //beágyazni a th-ba a headert
-    const th = document.createElement('th')
-    th.innerHTML = headcell.headerstring
-    th.colSpan = headcell.colSpan;
-    tableheadrow.appendChild(th)    
-}
-
-
 //---------------------------------------------------------------------
 /**
  * 
@@ -141,59 +90,3 @@ function Validatefield(lastname, firstname1, pet){
     return result;
 }
 //--------------------------------------------------------------------- table-t létrehozó függvény
-rendertable();
-    function rendertable() {
-        for(const person of array){
-            const tr = document.createElement('tr')
-        
-        
-            const lastname = document.createElement('td')
-            tablebody.appendChild(tr)
-            tr.appendChild(lastname)
-            lastname.innerHTML = person.lastname
-        
-        
-            const firstname = document.createElement('td')
-            tablebody.appendChild(tr)
-            tr.appendChild(firstname)
-            firstname.innerHTML = person.firstname
-            tablebody.appendChild(tr)
-        
-        
-            if(person.firstname2===undefined){
-                firstname.colSpan = 2
-            }
-            else{
-                const firstname2 = document.createElement('td')
-                firstname2.innerHTML = person.firstname2
-                tr.appendChild(firstname2)
-            }
-        
-        
-            const married = document.createElement('td');
-            tablebody.appendChild(tr);
-            tr.appendChild(married);
-            married.innerHTML = person.married === true? 'Igaz' : 'Nem';
-        
-        
-            const pet = document.createElement('td');
-            tablebody.appendChild(tr);
-            tr.appendChild(pet);
-            pet.innerHTML = person.pet;
-            tablebody.appendChild(tr);
-        
-            
-            tr.addEventListener('click', function(e)
-                {
-                    const selected = tablebody.querySelector('.selected');
-                    if(selected !=undefined)
-                        {
-                            selected.classList.remove('selected');
-                            
-                        }
-                    console.log('click');
-                    e.currentTarget.classList.add('selected'); 
-                }
-            )  
-        }
-    }
